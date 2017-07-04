@@ -1,4 +1,5 @@
 var request = require('request');
+var fs = require('fs');
 
 var GITHUB_USER = "takng";
 var GITHUB_TOKEN = "4c027e80b056b8dbdd22055d8c1a662b70a25cfe";
@@ -36,6 +37,25 @@ console.log(requestURL);
 
 }
 
+function downloadImageByURL(url, filePath) {
+  // ...
+
+  url = url.replace(/\"/g, '');
+  filePath = filePath.replace(/\"/g, '');
+  filePath = filePath + ".jpeg";
+
+  request.get(url)
+       .on('error', function (err) {                                   
+         throw err; 
+       })
+       .on('response', function (response) {                          
+         console.log('Response Status Code: ', response.statusCode);
+         console.log('Response Status Message: ', response.statusMessage);
+         console.log('Response Status Message: ', response.headers['content-type']);
+       })
+       .pipe(fs.createWriteStream(filePath));
+}
+
 getRepoContributors("jquery", "jquery", function(err, result) {
   // console.log("Errors:", err);
 
@@ -44,6 +64,7 @@ getRepoContributors("jquery", "jquery", function(err, result) {
     var obj = result[key];
     // console.log(key);
     console.log(obj.avatar_url);
+    downloadImageByURL(JSON.stringify(obj.avatar_url), 'avatars/' + JSON.stringify(obj.login));
     // console.log('-----');
   }
 }
