@@ -44,7 +44,7 @@ console.log(response.statusCode);
 console.log(body);
       json = JSON.parse(body);
 //console.log(json.avatar_url);
-      //cb(0, json.avatar_url);
+      cb(0, json);
     }
   });
 
@@ -53,12 +53,20 @@ console.log(body);
 getRepoContributors("jquery", "jquery", function(err, result) {
   console.log("Errors:", err);
   // console.log("Result:", result);
-console.log(json);
-  for (var i = 0; i < result.length; i++) {
-    //console.log(result[i]);
-    console.log(i);
+
+var i = 0;
+for (key in result) {  
+if (result.hasOwnProperty(key)) {  
+    var obj = result[key];
+    console.log(key);
+    //console.log(obj);
+    console.log(obj.avatar_url);
   console.log('-----');
-  }
+}
+}
+
+
+    
 });
 
 
