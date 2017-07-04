@@ -5,7 +5,13 @@ var GITHUB_USER = "takng";
 var GITHUB_TOKEN = "4c027e80b056b8dbdd22055d8c1a662b70a25cfe";
 var json;
 
+var myArgs = process.argv.slice(2);
+
 console.log('Welcome to the GitHub Avatar Downloader!');
+if (myArgs[0] == undefined || myArgs[1] == undefined) {
+  console.log('Must input repoOwner and repoName');
+  return false;
+}
 
 function getRepoContributors(repoOwner, repoName, cb) {
   // ...
@@ -56,7 +62,8 @@ function downloadImageByURL(url, filePath) {
        .pipe(fs.createWriteStream(filePath));
 }
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+// getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(myArgs[0], myArgs[1], function(err, result) {
   // console.log("Errors:", err);
 
   for (key in result) {  
