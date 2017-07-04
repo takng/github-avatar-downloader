@@ -14,7 +14,6 @@ if (myArgs[0] == undefined || myArgs[1] == undefined) {
 }
 
 function getRepoContributors(repoOwner, repoName, cb) {
-  // ...
 
   var requestURL = 'https://'+ GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
 
@@ -44,7 +43,6 @@ console.log(requestURL);
 }
 
 function downloadImageByURL(url, filePath) {
-  // ...
 
   url = url.replace(/\"/g, '');
   filePath = filePath.replace(/\"/g, '');
